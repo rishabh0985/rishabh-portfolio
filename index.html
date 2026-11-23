@@ -14,14 +14,12 @@
   --paper:#f3ecdf; --paper-2:#faf6ee; --kraft:#d8c19c; --kraft-2:#c9ad80; --ink:#1f1b16; --soft:#5d554b;
   --red:#e8503a; --mustard:#f2b632; --teal:#2f8f83; --blush:#f4b6a6; --cobalt:#2b4acb; --mint:#bfe3d0; --sky:#bcd7f2;
   --display:"Dela Gothic One",system-ui,sans-serif; --hand:"Caveat",cursive; --body:"DM Sans",system-ui,sans-serif;
-  --shadow:0 1px 1px rgba(60,40,20,.08),0 6px 14px rgba(60,40,20,.12),0 18px 30px -12px rgba(60,40,20,.25);
+  --shadow:0 2px 3px rgba(60,40,20,.12),0 12px 22px -10px rgba(60,40,20,.32);
   --gutter:clamp(16px,4vw,48px); --max:1240px;
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain:url("assets/grain.png");
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html.lenis,html.lenis body{height:auto}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-html{background:var(--paper);overflow-x:clip;scroll-behavior:smooth}
+html{background:var(--paper);overflow-x:clip;scroll-behavior:smooth;scroll-padding-top:90px}
 body{font-family:var(--body);color:var(--ink);background:var(--paper) var(--grain);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -83,26 +81,26 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:12px;paddi
 .me .sun{position:absolute;inset:6% 4% 14% 4%;border-radius:50%;background:var(--mustard) var(--grain);box-shadow:var(--shadow)}
 .me .sun::after{content:"";position:absolute;inset:-18px;border-radius:50%;border:2px dashed rgba(31,27,22,.35);animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.me img{position:relative;width:100%;height:auto;filter:drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 -4px 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 14px 18px rgba(60,40,20,.3));
-}
+.me img{position:relative;width:100%;height:auto;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1px #fff) drop-shadow(0 12px 16px rgba(60,40,20,.28))}
 .me .label{position:absolute;z-index:3;padding:8px 14px;border:2px solid var(--ink);border-radius:12px;background:var(--paper-2);font-weight:700;font-size:.9rem;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
-.me .l1{left:-18px;top:30%;transform:rotate(-6deg);background:var(--sky)}
-.me .l2{right:-14px;top:12%;transform:rotate(5deg);background:var(--blush)}
-.me .arrow{position:absolute;left:-112px;bottom:46%;width:120px;z-index:3}
+.me .l1{left:-44px;top:auto;bottom:34%;transform:rotate(-6deg);background:var(--sky)}
+.me .l2{right:-30px;top:2%;transform:rotate(5deg);background:var(--blush)}
+.me .arrow{position:absolute;left:-150px;bottom:52%;width:120px;z-index:3}
 .me .arrow p{font-family:var(--hand);font-weight:700;font-size:1.5rem;color:var(--red);transform:rotate(-8deg);margin-left:-10px}
 
 /* paper-cut landscape */
 .land{position:absolute;left:0;right:0;bottom:0;height:clamp(150px,19vw,260px);z-index:3;pointer-events:none}
 .land svg{position:absolute;left:-4%;width:108%;height:100%;bottom:0}
-.land .l{filter:drop-shadow(0 -6px 8px rgba(60,40,20,.18));will-change:transform;transition:transform .4s ease-out}
+.land .l,.land .s{transition:transform .5s ease-out}
+.land .s{fill:rgba(60,40,20,.13)}
 
 /* tape strip marquee */
 .strip{position:relative;z-index:3;background:var(--ink);color:var(--paper);padding:14px 0;transform:rotate(-1.5deg);margin:-30px -2% 0;box-shadow:var(--shadow);overflow:hidden}
-.strip .track{display:flex;gap:34px;width:max-content;animation:scroll 30s linear infinite;font-family:var(--display);font-size:clamp(1rem,2.2vw,1.5rem);white-space:nowrap}
+.strip .track{will-change:transform;display:flex;gap:34px;width:max-content;animation:scroll 30s linear infinite;font-family:var(--display);font-size:clamp(1rem,2.2vw,1.5rem);white-space:nowrap}
 .strip .track span::after{content:"✂";margin-left:34px;color:var(--mustard)}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
-section{position:relative;padding:clamp(80px,10vw,130px) 0}
+section{position:relative;padding:clamp(80px,10vw,130px) 0;contain:paint}
 .head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,50px)}
 .head h2{font-size:clamp(2.4rem,6.5vw,5rem)}
 .head h2 .hand{font-size:1.15em;color:var(--red);font-weight:700;display:inline-block;transform:rotate(-4deg)}
@@ -139,7 +137,7 @@ section{position:relative;padding:clamp(80px,10vw,130px) 0}
 .tabs .shuffle{margin-left:auto;background:var(--red);color:#fff;border-radius:12px;box-shadow:3px 3px 0 var(--ink)}
 .desk{position:relative;height:1180px;z-index:2}
 .desk-hint{position:absolute;right:2%;top:-6px;font-family:var(--hand);font-weight:700;font-size:1.5rem;transform:rotate(4deg);z-index:1;pointer-events:none}
-.pol{position:absolute;width:250px;background:#fff;padding:12px 12px 14px;box-shadow:var(--shadow);cursor:grab;touch-action:none;user-select:none;
+.pol{will-change:transform;backface-visibility:hidden;position:absolute;width:250px;background:#fff;padding:12px 12px 14px;box-shadow:var(--shadow);cursor:grab;touch-action:none;user-select:none;
   transition:left .7s cubic-bezier(.2,.9,.2,1.15),top .7s cubic-bezier(.2,.9,.2,1.15),transform .35s,box-shadow .2s,opacity .4s}
 .pol.dragging{cursor:grabbing;transition:transform .2s,box-shadow .2s;box-shadow:0 30px 50px -10px rgba(60,40,20,.45)}
 .pol:hover{box-shadow:0 2px 2px rgba(60,40,20,.1),0 22px 40px -12px rgba(60,40,20,.4)}
@@ -195,6 +193,22 @@ section{position:relative;padding:clamp(80px,10vw,130px) 0}
 footer{padding:40px 0 50px;text-align:center;color:var(--soft);font-size:.9rem}
 footer .hand{font-size:1.4rem;color:var(--ink)}
 
+/* custom cursor (mouse/trackpad only) */
+@media (pointer:fine){
+  html.cc, html.cc a, html.cc button, html.cc .pol, html.cc [role=button]{cursor:none}
+}
+.cur-dot,.cur-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:200;will-change:transform}
+.cur-dot{width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--red)}
+.cur-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;
+  font-family:var(--hand);font-weight:700;font-size:1.05rem;color:var(--ink);transition:width .25s,height .25s,margin .25s,background .25s,border-color .25s}
+.cur-ring span{opacity:0;transition:opacity .2s;white-space:nowrap}
+.cur-ring.link{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(242,182,50,.45);border-color:var(--ink)}
+.cur-ring.label{width:100px;height:100px;margin:-50px 0 0 -50px;background:var(--mustard);transform-origin:center}
+.cur-ring.label span{opacity:1}
+.cur-ring.down{background:var(--red);border-color:var(--red)}
+.cur-ring.hide,.cur-dot.hide{opacity:0}
+@media (pointer:coarse){.cur-dot,.cur-ring{display:none}}
+
 /* viewer */
 .viewer{position:fixed;inset:0;z-index:100;display:none;background:rgba(216,193,156,.94)}
 .viewer::before{content:"";position:absolute;inset:0;background:var(--grain);pointer-events:none}
@@ -238,7 +252,7 @@ footer .hand{font-size:1.4rem;color:var(--ink)}
   .hero-grid{grid-template-columns:1fr}
   .me{width:min(270px,76%);margin-top:0;margin-bottom:calc(-1 * clamp(90px,24vw,130px))}
   .hero-grid{gap:10px}
-  .me .l1{top:46%}
+  .me .l1{bottom:30%}
   .me .arrow{display:none}
   .me .l1{left:-6px}.me .l2{right:-6px}
   .desk{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:22px 14px}
@@ -423,6 +437,7 @@ footer .hand{font-size:1.4rem;color:var(--ink)}
   </section>
 </main>
 
+<div class="cur-ring" id="curRing" aria-hidden="true"><span id="curTxt"></span></div><div class="cur-dot" id="curDot" aria-hidden="true"></div>
 <footer><p class="hand">cut, pasted &amp; designed with ♥ in Gurgaon</p><p>© <span id="yr"></span> Rishabh Kushwah · Graphic Designer</p></footer>
 
 <!-- viewer -->
@@ -435,7 +450,6 @@ footer .hand{font-size:1.4rem;color:var(--ink)}
 </div>
 
 <script src="data.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 const P = window.PROJECTS || [];
 const $ = id => document.getElementById(id);
@@ -454,10 +468,13 @@ const R = $("ransom");
 R.innerHTML = [...R.textContent].map((ch,i) => { const s = styles[i % styles.length];
   return `<span aria-hidden="true" style="font-family:${s.f};background:${s.bg};color:${s.c};transform:rotate(${(rnd()*10-5).toFixed(1)}deg) translateY(${(rnd()*8-4).toFixed(0)}px)">${ch}</span>`; }).join("");
 
+/* paper-cut hills: a soft shadow copy under each layer */
+document.querySelectorAll(".land .l").forEach(l => { const sh = l.cloneNode(); sh.setAttribute("class","s"); sh.removeAttribute("fill");
+  sh.setAttribute("transform","translate(0,-7)"); sh.dataset.d = l.dataset.d; l.before(sh); });
 /* paper-cut parallax */
-const layers = [...document.querySelectorAll(".land .l")];
+const layers = [...document.querySelectorAll(".land .l, .land .s")];
 if (fine && !reduce) addEventListener("pointermove", e => { const x = e.clientX / innerWidth - .5;
-  layers.forEach(l => l.style.transform = `translateX(${-x * l.dataset.d}px)`); });
+  requestAnimationFrame(() => layers.forEach(l => l.style.translate = `${-x * l.dataset.d}px 0`)); }, {passive:true});
 
 /* ---------- work desk ---------- */
 const desk = $("desk"), tabs = $("tabs");
@@ -512,12 +529,12 @@ const sh = document.createElement("button"); sh.className = "shuffle"; sh.textCo
 
 /* ---------- viewer ---------- */
 const V = {el:$("viewer"), img:$("vImg"), title:$("vTitle"), meta:$("vMeta"), thumbs:$("vThumbs"), be:$("vBe"), frame:$("vFrame")};
-let cp = 0, ci = 0, lastFocus, lenis = null;
+let cp = 0, ci = 0, lastFocus;
 function openViewer(i){ cp = i; const p = P[i]; lastFocus = document.activeElement;
   V.title.textContent = p.title; V.be.href = p.url;
   V.thumbs.innerHTML = p.imgs.map((s,k) => `<button aria-label="Slide ${k+1}"><img src="${thumb(s)}" alt=""></button>`).join("");
   [...V.thumbs.children].forEach((b,k) => b.onclick = () => show(k));
-  V.el.classList.add("open"); document.body.style.overflow = "hidden"; if (lenis) lenis.stop(); show(0); $("vClose").focus(); }
+  V.el.classList.add("open"); document.body.style.overflow = "hidden"; show(0); $("vClose").focus(); }
 function show(k){ const p = P[cp]; ci = (k + p.imgs.length) % p.imgs.length;
   V.img.src = p.imgs[ci]; V.img.alt = `${p.title}, slide ${ci+1}`;
   V.frame.style.animation = "none"; V.frame.offsetHeight; V.frame.style.animation = "";
@@ -525,7 +542,7 @@ function show(k){ const p = P[cp]; ci = (k + p.imgs.length) % p.imgs.length;
   [...V.thumbs.children].forEach((b,j) => b.classList.toggle("on", j === ci));
   V.thumbs.children[ci].scrollIntoView({block:"nearest", inline:"center"});
   $("vPrev").hidden = $("vNext").hidden = p.imgs.length < 2; }
-function closeViewer(){ V.el.classList.remove("open"); document.body.style.overflow = ""; if (lenis) lenis.start(); if (lastFocus) lastFocus.focus(); }
+function closeViewer(){ V.el.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
 $("vClose").onclick = closeViewer; $("vPrev").onclick = () => show(ci-1); $("vNext").onclick = () => show(ci+1);
 $("vStage").addEventListener("click", e => { if (e.target.id === "vStage") closeViewer(); });
 addEventListener("keydown", e => { if (!V.el.classList.contains("open")) return;
@@ -534,18 +551,36 @@ let tx = 0; V.img.addEventListener("touchstart", e => tx = e.touches[0].clientX,
 V.img.addEventListener("touchend", e => { const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 40) show(ci + (d < 0 ? 1 : -1)); });
 
 /* ---------- smooth scroll, menu, reveal ---------- */
-if (window.Lenis && !reduce) {
-  lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-  (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
-  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => {
-    const t = document.querySelector(a.getAttribute("href")); if (!t) return; e.preventDefault(); lenis.scrollTo(t, {offset: -90}); }));
-}
 const menuBtn = $("menuBtn"), links = $("links");
 menuBtn.onclick = () => { const o = links.classList.toggle("open"); menuBtn.setAttribute("aria-expanded", o); menuBtn.textContent = o ? "✕" : "☰"; };
 links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => { links.classList.remove("open"); menuBtn.textContent = "☰"; }));
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.15});
 document.querySelectorAll(".drop").forEach((el,i) => { el.style.transitionDelay = (i%4)*90 + "ms"; io.observe(el); });
 $("yr").textContent = new Date().getFullYear();
+
+/* ---------- custom cursor ---------- */
+if (fine && !reduce) {
+  document.documentElement.classList.add("cc");
+  const dot = $("curDot"), ring = $("curRing"), txt = $("curTxt");
+  let mx = -100, my = -100, rx = -100, ry = -100, running = false;
+  const tick = () => { rx += (mx - rx) * .2; ry += (my - ry) * .2;
+    ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
+    if (Math.abs(mx - rx) + Math.abs(my - ry) > .3) requestAnimationFrame(tick); else running = false; };
+  addEventListener("pointermove", e => { if (e.pointerType !== "mouse") return; mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate3d(${mx}px,${my}px,0)`; if (!running) { running = true; requestAnimationFrame(tick); } }, {passive:true});
+  const setState = t => {
+    const pol = t.closest(".pol"), view = t.closest(".v-frame"), link = t.closest("a,button,.stk,.ransom span");
+    ring.classList.remove("link","label"); txt.textContent = "";
+    if (pol) { ring.classList.add("label"); txt.textContent = mobile() ? "view" : "drag / view"; }
+    else if (view) { ring.classList.add("label"); txt.textContent = "swipe →"; }
+    else if (link) ring.classList.add("link");
+  };
+  addEventListener("pointerover", e => setState(e.target), {passive:true});
+  addEventListener("pointerdown", () => ring.classList.add("down"));
+  addEventListener("pointerup", () => ring.classList.remove("down"));
+  document.addEventListener("mouseleave", () => { dot.classList.add("hide"); ring.classList.add("hide"); });
+  document.addEventListener("mouseenter", () => { dot.classList.remove("hide"); ring.classList.remove("hide"); });
+}
 </script>
 </body>
 </html>
